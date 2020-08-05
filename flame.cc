@@ -144,13 +144,13 @@ int main() {
       max_freq = std::max(scaled_pixels[y * kSize + x].frequency, max_freq);
     }
   }
-  std::vector<unsigned char> img(kSize * kSize * 3);
+  std::vector<unsigned char> img(kSize * kSize * 4, 255);
   for (size_t y = 0; y < kSize; y++) {
     for (size_t x = 0; x < kSize; x++) {
       float alpha =
           std::log(scaled_pixels[y * kSize + x].frequency) / std::log(max_freq);
       for (size_t i = 0; i < 3; i++) {
-        img[3 * kSize * y + 3 * x + i] =
+        img[4 * kSize * y + 4 * x + i] =
             std::max(0.f, std::min(255.f, scaled_pixels[y * kSize + x].rgb[i] *
                                               std::pow(alpha, 1 / kGamma)));
       }

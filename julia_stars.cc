@@ -12,7 +12,7 @@ constexpr size_t kSize = 4096;
 constexpr size_t kMaxIters = 64;
 
 int main() {
-  std::vector<unsigned char> img(kSize * kSize * 3);
+  std::vector<unsigned char> img(kSize * kSize * 4, 255);
   std::vector<unsigned char> star_size(kSize * kSize);
   std::vector<float> star_alpha(kSize * kSize);
   std::complex<float> c{0.11, 0.550};
@@ -47,11 +47,11 @@ int main() {
           star_alpha[y * kSize + x] = 1;
         }
       }
-      img[y * kSize * 3 + x * 3 + 0] =
+      img[y * kSize * 4 + x * 4 + 0] =
           std::min(255.0f, std::max(0.0f, std::round(r * 255)));
-      img[y * kSize * 3 + x * 3 + 1] =
+      img[y * kSize * 4 + x * 4 + 1] =
           std::min(255.0f, std::max(0.0f, std::round(g * 255)));
-      img[y * kSize * 3 + x * 3 + 2] =
+      img[y * kSize * 4 + x * 4 + 2] =
           std::min(255.0f, std::max(0.0f, std::round(b * 255)));
     }
   }
@@ -71,12 +71,12 @@ int main() {
         for (int x = lowx; x <= hix; x++) {
           if (std::abs(x - x0) + std::abs(y - y0) > size)
             continue;
-          img[y * kSize * 3 + x * 3 + 0] =
-              (1 - alpha) * img[y * kSize * 3 + x * 3 + 0] + alpha * 255;
-          img[y * kSize * 3 + x * 3 + 1] =
-              (1 - alpha) * img[y * kSize * 3 + x * 3 + 1] + alpha * 255;
-          img[y * kSize * 3 + x * 3 + 2] =
-              (1 - alpha) * img[y * kSize * 3 + x * 3 + 2] + alpha * 255;
+          img[y * kSize * 4 + x * 4 + 0] =
+              (1 - alpha) * img[y * kSize * 4 + x * 4 + 0] + alpha * 255;
+          img[y * kSize * 4 + x * 4 + 1] =
+              (1 - alpha) * img[y * kSize * 4 + x * 4 + 1] + alpha * 255;
+          img[y * kSize * 4 + x * 4 + 2] =
+              (1 - alpha) * img[y * kSize * 4 + x * 4 + 2] + alpha * 255;
         }
       }
     }

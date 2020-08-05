@@ -159,7 +159,7 @@ void ComputeFractal(const PatternT &pattern_img,
     for (size_t x = 0; x < xsz; x++) {
       size_t closest = closest_root(attractor[y * xsz + x]);
       for (size_t c = 0; c < 3; c++) {
-        (*output)[y * xsz * 3 + x * 3 + c] =
+        (*output)[y * xsz * 4 + x * 4 + c] =
             colours[closest][c] * color_scale[y * xsz + x];
       }
     }
@@ -217,7 +217,7 @@ int main() {
   PatternT pattern_img;
   ComputePattern(&pattern_img, pattern, xsz, ysz, pad_x, pad_y, pxsz, pysz,
                  scale);
-  std::vector<unsigned char> output(xsz * ysz * 3);
+  std::vector<unsigned char> output(xsz * ysz * 4, 255);
   ComputeFractal(pattern_img, &output, xsz, ysz, scale, poly, colours);
   WritePNG(output.data(), xsz, ysz, "attractor.png");
 }
